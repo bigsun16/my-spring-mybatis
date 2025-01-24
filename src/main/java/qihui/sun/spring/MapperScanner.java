@@ -13,7 +13,6 @@ public class MapperScanner extends ClassPathBeanDefinitionScanner {
         super(registry);
     }
 
-
     @Override
     protected boolean isCandidateComponent(AnnotatedBeanDefinition beanDefinition) {
         return beanDefinition.getMetadata().isInterface();
@@ -24,7 +23,9 @@ public class MapperScanner extends ClassPathBeanDefinitionScanner {
         Set<BeanDefinitionHolder> beanDefinitionHolders = super.doScan(basePackages);
         for (BeanDefinitionHolder beanDefinitionHolder : beanDefinitionHolders) {
             BeanDefinition beanDefinition = beanDefinitionHolder.getBeanDefinition();
+            // 设置 MapperFactoryBean 的泛型参数类型，即 Mapper 接口类型。
             beanDefinition.getConstructorArgumentValues().addGenericArgumentValue(beanDefinition.getBeanClassName());
+            // 设置FactoryBean 的类型为 MapperFactoryBean。因为 MapperFactoryBean 实现了 FactoryBean，所以 Spring 会通过调用其 getObject 方法来创建对象。
             beanDefinition.setBeanClassName(MapperFactoryBean.class.getName());
         }
         return beanDefinitionHolders;

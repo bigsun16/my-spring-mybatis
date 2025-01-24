@@ -21,7 +21,7 @@ public class MapperBeanDefinitionRegistrar implements ImportBeanDefinitionRegist
         MapperScanner mapperScanner = new MapperScanner(registry);
         mapperScanner.addIncludeFilter(new TypeFilter() {
             @Override
-            public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) throws IOException {
+            public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory) {
                 return true;
             }
         });

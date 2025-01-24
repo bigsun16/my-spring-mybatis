@@ -14,7 +14,7 @@ public class MapperFactoryBean implements FactoryBean<Object> {
     }
 
     @Autowired
-    public void setSqlSession(SqlSessionFactory sqlSessionFactory){
+    public void setSqlSession(SqlSessionFactory sqlSessionFactory) {
         sqlSessionFactory.getConfiguration().addMapper(mapperClass);
         this.sqlSession = sqlSessionFactory.openSession();
     }
